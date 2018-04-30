@@ -1,13 +1,17 @@
 class User < ApplicationRecord
-  before_save { self.email = self.email.downcase}
+
+  has_many :microposts, dependent: :destroy
+
+  before_save {self.email = self.email.downcase}
   before_create :create_activation_digest
-  validates :name , presence: true, length: {maximum: 50}
-   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :name, presence: true, length: {maximum: 50}
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},
-                    format: {with: VALID_EMAIL_REGEX},
-                    uniqueness: {case_sensitive: false}
+            format: {with: VALID_EMAIL_REGEX},
+            uniqueness: {case_sensitive: false}
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -24,7 +28,7 @@ class User < ApplicationRecord
 
   def remember
     self.remember_token = User.new_token
-    update_attribute(:remember_digest , User.digest(remember_token))
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
 
   def forget
@@ -59,12 +63,16 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
   private
 
-    def create_activation_digest
-      self.activation_token = User.new_token
-      self.activation_digest = User.digest(activation_token)
-    end
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
 
 
 end
