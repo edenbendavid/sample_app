@@ -32,3 +32,8 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+#likes
+users.each do |user|
+  Micropost.all.shuffle.take(10).each {|post| user.like(post)}
+end

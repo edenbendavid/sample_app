@@ -291,3 +291,74 @@ span.picture {
     border: 0;
   }
 }
+.microposts-actions{
+  display: block;
+  height: 40px;
+  margin-left: 60px;
+  color: #b4b7b2;
+  ul {
+    height: 100%;
+    list-style: none;
+    li {
+      border:0;
+      padding-bottom: 0px;
+      float: left;
+    }
+  }
+
+  .micropost-action{
+    text-decoration: none;
+    padding-left: 0px;
+    background-color: transparent !important;
+
+
+    &:focus{
+      outline: 0 !important;
+      box-shadow: none;
+    }
+
+    .glyphicon {
+      font-size: 20px;
+    }
+  }
+}
+
+.like-button {
+  font-size: 18px;
+  .btn {
+    text-decoration: none;
+    padding-left: 0px;
+
+    &:focus{
+      outline: 0 !important;
+      box-shadow: none;
+    }
+  }
+
+  *[class^='micropost-likes-count']{
+    padding-left: 2px;
+    font-size: 16px;
+  }
+
+}
+
+.delete-button {
+  position: absolute;
+  left: 53em;
+  a {
+    text-decoration: none;
+    background-color: transparent !important;
+
+    .glyphicon {
+      font-size: 18px !important;
+    }
+    color: #b4b7b2;
+
+    &:hover{
+      color: #B00100;
+
+    }
+
+
+  }
+}

@@ -114,4 +114,13 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "should like and unlike post" do
+    eden = users(:eden)
+    micropost = microposts(:orange)
+    eden.like(micropost)
+    assert eden.likes?(micropost)
+    assert micropost.users_like.include? eden
+    eden.unlike(micropost)
+    assert_not eden.likes?(micropost)
+  end
 end

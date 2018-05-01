@@ -1,0 +1,1 @@
+$("#micropost-actions-<%= @micropost.id%>").replaceWith("<%= escape_javascript(render(:partial => "shared/micropost_actions", :locals => {:micropost => @micropost})) %>");

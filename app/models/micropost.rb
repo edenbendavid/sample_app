@@ -2,6 +2,10 @@ class Micropost < ApplicationRecord
 
   belongs_to :user
 
+  has_many :likes
+
+  has_many :users_like, through: :likes, source: :user
+
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
 
