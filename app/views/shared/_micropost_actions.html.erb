@@ -1,3 +1,4 @@
+<% if current_user %>
 <nav class="row microposts-actions" id="micropost-actions-<%= micropost.id %>">
   <ul class="nav">
   <li class="micropost-action like-button">
@@ -29,3 +30,4 @@
   </li>
   </ul>
 </nav>
+<% end %>
